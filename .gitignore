@@ -1,0 +1,11 @@
+# Lista branca: ignora TUDO em ~/.claude (histórico, sessões, credenciais, configurações)
+# e libera só o que deve ser versionado.
+/*
+!/.gitignore
+!/README.md
+!/CLAUDE.md
+!/skills/
+
+# Skills sincronizadas pela organização não entram
+/skills/synced/
+.DS_Store
