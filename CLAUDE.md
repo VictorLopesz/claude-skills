@@ -14,21 +14,29 @@ Estas instruções valem para todas as sessões do Claude Code nesta máquina.
 
 ## Automação de testes
 
-- Toda automação de testes web deve usar **Cypress**.
+- Frameworks aceitos para testes web: **Cypress** ou **Playwright**.
+  - Projeto existente: usar o framework que ele já usa; nunca misturar os dois no mesmo projeto.
+  - Projeto novo: perguntar qual usar (skills `/cypress-setup` e `/playwright-setup`).
 - Linguagem padrão: **TypeScript**. Usar **JavaScript** apenas quando o projeto já estiver em JS.
-- Não sugerir outros frameworks (Playwright, Selenium, Puppeteer etc.), a menos que eu peça.
+- Não sugerir outros frameworks (Selenium, Puppeteer, WebdriverIO etc.), a menos que eu peça.
+- Evidências de CTs: skill `/evidencias` (funciona com qualquer framework que tenha adaptador).
 
 ### Organização do código
 
 Manter o código sempre bem organizado e separado por responsabilidade:
 
-- **Page Objects** (`cypress/pages/`): seletores e ações de cada página; os testes não devem conter seletores soltos.
-- **Custom Commands** (`cypress/support/commands.ts`): ações reutilizáveis entre páginas (ex.: login), com tipagem declarada em `cypress/support/index.d.ts`.
-- **Fixtures** (`cypress/fixtures/`): massa de dados e respostas mockadas; não deixar dados fixos dentro dos testes.
-- **Specs** (`cypress/e2e/`): apenas o fluxo e as validações do teste, usando Page Objects, Commands e Fixtures.
-- Preferir seletores estáveis (`data-cy`, `data-testid`) a classes CSS ou XPath.
-- Evitar `cy.wait()` com tempo fixo; usar esperas por elemento ou `cy.intercept()`.
-- Credenciais e URLs de ambiente em variáveis de ambiente (`cypress.env.json` fora do git), nunca no código.
+| Responsabilidade | Cypress | Playwright |
+|---|---|---|
+| Page Objects: seletores/locators e ações de cada página | `cypress/pages/` | `pages/` |
+| Ações reutilizáveis entre páginas (ex.: login) | Custom Commands em `cypress/support/commands.ts`, tipados em `index.d.ts` | Fixtures customizadas (`test.extend`) em `fixtures/` |
+| Massa de dados e mocks | `cypress/fixtures/` | `data/` |
+| Specs: apenas fluxo e validações | `cypress/e2e/` | `tests/` |
+| Credenciais e URLs de ambiente (fora do git) | `cypress.env.json` | `.env` |
+
+- Os testes não contêm seletores soltos.
+- Preferir seletores estáveis (`data-cy`, `data-testid`, `getByRole`) a classes CSS ou XPath.
+- Nunca usar espera com tempo fixo (`cy.wait(ms)`, `page.waitForTimeout(ms)`); esperar por elemento, asserção ou resposta de rede (`cy.intercept`, `page.waitForResponse`).
+- Credenciais nunca no código.
 
 ## Ambiente
 

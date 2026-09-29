@@ -9,7 +9,7 @@ Instruções globais e skills pessoais do Claude Code.
 | `CLAUDE.md` | Instruções globais (idioma, preferências, padrão de automação com Cypress) |
 | `skills/cypress-setup/` | `/cypress-setup`: monta um projeto Cypress + TypeScript com Page Objects, Custom Commands e Fixtures |
 | `skills/playwright-setup/` | `/playwright-setup`: monta um projeto Playwright + TypeScript com Page Objects, fixtures customizadas e massa de dados |
-| `skills/evidencias/` | `/evidencias`: grava evidências (vídeo/prints) de CTs Cypress com overlays na página: placa do caso, terminal REST, destaques e callouts |
+| `skills/evidencias/` | `/evidencias`: grava evidências (vídeo/prints) de CTs Cypress, Playwright ou qualquer ferramenta com adaptador, com overlays na página: placa do caso, terminal REST, destaques e callouts |
 | `skills/d/` | `/d [caracteres] [nível]`: resume a última explicação com limite de caracteres e nível de dificuldade (0–10) |
 
 ## Instalação em outra máquina
@@ -30,6 +30,7 @@ git checkout -f main   # sobrescreve CLAUDE.md e skills locais de mesmo nome
 
 ## Requisitos das skills
 
-- `/cypress-setup` e `/evidencias`: Node.js e npm; testado com Cypress 16.1.0.
+- `/cypress-setup`: Node.js e npm; testado com Cypress 16.1.0.
+- `/evidencias`: Node.js e npm; testado com Cypress 16.1.0 e Playwright 1.63.0 (ffmpeg opcional, para converter vídeos .webm em .mp4).
 - `/playwright-setup`: Node.js e npm; testado com Playwright 1.63.0 e TypeScript 7.0.2.
 - `/d`: Python 3 (usado para contar caracteres).
